@@ -1,95 +1,59 @@
-# Meteor Dodge Repair Lab
+# Software Engineering Lab Portfolio
 
-This project is a space survival obstacle-dodging game using **Pygame**. It introduces students to directional velocity vectors, radial collision math, starfield rendering, particle trails, and dynamic difficulty scaling within an object-oriented codebase.
----
+This repository contains the submissions, implementation work, test cases, reports, and supporting evidence for **Software Engineering Labs 1–7**.
 
-## What's Provided
+The labs use a common case study, the **Dropshipping Inventory & Order Orchestrator (DIOO)**, for requirements and architecture activities, followed by practical software development, code quality, and testing exercises.
 
-A working Meteor Dodge game with:
+## Lab Overview
 
-- A responsive player starship with engine trail effects and 4-directional movement (`WASD` / Arrow Keys)
-- Procedurally generated starfield background
-- Irregular polygonal meteors that rotate and tumble downwards at randomized speeds and angles
-- Radius-based circular collision detection against the ship
-- Dynamic spawn intervals that decrease as survival time increases
-- Launch state, survival timer HUD, and a Game Over overlay with restart functionality
+| Lab | Topic | Description |
+|---|---|---|
+| [Lab 1](Lab-1/PES2UG24CS599_LAB1_SE.pdf) | Requirements Engineering & UML Use-Case Modelling | Defines the functional and non-functional requirements for DIOO, including priorities, acceptance criteria, and rationale. Reviews requirement completeness and testability, identifies actors and use cases, and documents the main and alternate use-case flows. |
+| [Lab 2](Lab-2/PES2UG24CS599_LAB2_SE.pdf) | Agile Software Development with Jira | Demonstrates Agile project planning in Jira. Creates Epics and User Stories, estimates work using Story Points, prioritizes the product backlog, runs a mock sprint, tracks story progress, and reviews the sprint burndown chart. |
+| [Lab 3](Lab-3/PES2UG24CS599_SE_Lab3.pdf) | Component Modelling & Architectural Pattern Selection | Compares layered, client-server, and microservices architectures for DIOO and selects microservices. Models the six main components: API Gateway, Order Manager, Payment Service, Supplier Integration Service, Inventory Sync Service, and Notification Service. Includes the [component diagram](Lab-3/component-diagram.png). |
+| [Lab 4](Lab-4/README.md) | Debugging and Repair of a Pygame Application | Works with a Meteor Dodge space-survival game. The exercise focuses on debugging gameplay behaviour and extending the game with laser firing, meteor splitting, shield power-ups, and consecutive-survival score multipliers. Includes the implementation, before/after evidence, and chat history. |
+| [Lab 5](Lab-5/tournament_scoreboard.py) | Static Code Analysis | Applies Pylint, Bandit, and Flake8 to a Python tournament scoreboard. Documents security, code-quality, and style findings, the fixes applied, and the results in the [issue log](Lab-5/issues.md) and [reflection](Lab-5/reflection.md). |
+| [Lab 6](Lab-6/elevator_dispatch.py) | Statement and Branch Coverage Testing | Tests an elevator-dispatch module covering direction selection, door actions, and elevator selection. Includes separate test suites for statement and branch coverage, along with coverage screenshots. |
+| [Lab 7](Lab-7/SE%20LAB%207.pdf) | Property-Based Testing & Robust Input Validation | Uses Hypothesis property-based tests for elevator utility functions that parse floor requests, calculate total travel, and calculate load percentages. Tests valid inputs, malformed inputs, unexpected input types, and edge cases to check correctness and prevent crashes. |
 
-It has **one deliberate bug** and **three optional features** left as tasks to implement. You are expected to **analyze**, **interact with an AI assistant**, and **complete/fix** the game to make it fully functional and more interesting.
+## Repository Structure
 
-### **Use an LLM (e.g. ChatGPT or Claude) as your debugging and pair-programming partner for this lab.**
----
-
-## Getting Started
-
-### Setup
-
-1. Make sure you have Python 3.10+ installed.
-2. Install dependencies:
-
-```bash
-pip install -r requirements.txt
+```text
+SE-LAB/
+├── Lab-1/
+│   └── PES2UG24CS599_LAB1_SE.pdf
+├── Lab-2/
+│   └── PES2UG24CS599_LAB2_SE.pdf
+├── Lab-3/
+│   ├── PES2UG24CS599_SE_Lab3.pdf
+│   └── component-diagram.png
+├── Lab-4/
+│   ├── README.md
+│   ├── main.py
+│   ├── game/
+│   └── Videos/
+├── Lab-5/
+│   ├── tournament_scoreboard.py
+│   ├── issues.md
+│   ├── reflection.md
+│   └── reports/
+├── Lab-6/
+│   ├── elevator_dispatch.py
+│   ├── test_elevator_dispatch.py
+│   ├── CodeCoverageTest_elevator_dispatch.py
+│   ├── BranchCoverageTest_elevator_dispatch.py
+│   └── coverage screenshots
+└── Lab-7/
+    ├── SE LAB 7.pdf
+    ├── elevator_dispatch.py
+    └── test_elevator_dispatch.py
 ```
 
-3. Run the game:
+## Tools and Technologies
 
-```bash
-python main.py
-```
+- **Requirements and modelling:** UML use-case and component diagrams
+- **Agile planning:** Jira, Epics, User Stories, Story Points, Scrum board, Burndown Chart
+- **Application development:** Python and Pygame
+- **Static analysis:** Pylint, Bandit, Flake8
+- **Testing:** pytest, code coverage, branch coverage, and Hypothesis
 
-**Controls:** Press SPACE to launch or restart. Use WASD or Arrow Keys to pilot the ship.
-| Key | Action |
-|-----|--------|
-| W/A/S/D or Arrows | Move ship |
-| SPACE | Start / Restart |
-
-## Tasks to Complete
-
-Each task must be completed using an iterative process involving LLM suggestions and your critical code review.
-
-### Task 1: Fix the laser firing / input state bug
-
-Pressing SPACE launches the ship from the title screen, but pressing SPACE during active flight does nothing rather than firing a defensive laser projectile. Ensure the ship fires lasers to destroy incoming meteors while flying.
-
-### Task 2: Implement Meteor Splitting on Impact
-
-Destroying large meteors currently causes them to vanish completely from the screen. Make destroyed large meteors fracture into smaller child fragments that diverge outwards, while small meteors dissolve entirely.
- 
-### Task 3: Implement Collectible Shield Power-Up Orbs
-
-The ship is instantly destroyed on any meteor contact. Introduce a drifting energy orb that the player can collect to gain a temporary shield barrier capable of absorbing one collision.
-
-### Task 4: Implement Consecutive Survival Multipliers
-
-Score currently increments at a flat rate over time. Introduce an escalating multiplier that boosts score gain for every 10 seconds of continuous survival without taking a hit.
-
----
-
-## Expected Behavior
-
-- Pressing SPACE begins flight from the title screen.
-- Arrow keys or WASD steer the ship smoothly inside the window dimensions.   
-- Meteors continuously spawn from the top and fall at varying trajectories and rotation speeds.
-- Colliding with any meteor ends the run and displays the final survival time.
-- Pressing SPACE on the Game Over screen resets all objects and timers for a new run.
-
-## Folder Structure
-
-```
-meteor-dodge/
-├── main.py
-├── requirements.txt
-├── game/
-│   ├── __init__.py
-│   ├── game_engine.py
-│   ├── ship.py
-│   └── meteor.py
-└── README.md
-```
-
-## Submission Checklist
-
-Submission is only the following three things:
-
-- [] A 10-second video of gameplay **before** your changes, showing the bug/broken behavior
-- [] A 10-second video of gameplay **after** your changes, showing the bug fixed and the new features working
-- [] The Chat/LLM used page link, with the complete chat history
